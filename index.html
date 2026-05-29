@@ -63,11 +63,18 @@
         .section-title { font-size: 1.75rem; margin-bottom: 1.5rem; text-align: center; position: relative; color: var(--accent-purple); }
         .section-title::after { content: ''; display: block; width: 50px; height: 4px; background-color: var(--accent-cyan); margin: 0.5rem auto 0; border-radius: 2px; }
         .rooms-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-        .room-card { background-color: var(--bg-secondary); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 8px var(--card-shadow); border: 1px solid var(--border-color); display: flex; flex-direction: column; cursor: pointer; }
+        .room-card { background-color: var(--bg-secondary); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 8px var(--card-shadow); border: 1px solid var(--border-color); display: flex; flex-direction: column; cursor: pointer; position: relative; }
         .room-card:hover { transform: translateY(-8px); box-shadow: 0 8px 16px rgba(0, 180, 216, 0.3); border-color: var(--accent-cyan); }
+        .room-card.room-full { opacity: 0.6; background-color: #e0e0e0; cursor: not-allowed; }
+        .room-card.room-full:hover { transform: none; box-shadow: 0 4px 8px var(--card-shadow); }
+        .room-full-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 100; border-radius: 12px; }
+        .room-full-overlay h3 { color: white; font-size: 2rem; font-weight: 900; text-shadow: 0 2px 8px rgba(0,0,0,0.8); text-align: center; letter-spacing: 1px; }
         .room-image-wrapper { width: 100%; height: 220px; background-color: #333; position: relative; }
         .room-image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
         .room-price-badge { position: absolute; top: 1rem; left: 1rem; background-color: var(--accent-purple); color: white; padding: 0.3rem 0.8rem; border-radius: 6px; font-weight: 700; font-size: 0.9rem; }
+        .room-status-badge { position: absolute; top: 1rem; right: 1rem; padding: 0.3rem 0.8rem; border-radius: 6px; font-weight: 700; font-size: 0.85rem; color: white; }
+        .status-vacant { background-color: #2ecc71; }
+        .status-full { background-color: #e74c3c; }
         .room-details { padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1; }
         .room-details h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
         .room-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.25rem; flex-grow: 1; }
@@ -123,6 +130,18 @@
 
         @media (min-width: 768px) { .rooms-grid { grid-template-columns: repeat(2, 1fr); } .hero h1 { font-size: 3.2rem; } }
         @media (min-width: 1024px) { .rooms-grid { grid-template-columns: repeat(4, 1fr); } }
+        /* Mobile-specific tweaks */
+        @media (max-width: 768px) {
+            .modal-content { width: 96%; max-width: 96%; height: 100%; max-height: 100vh; border-radius: 8px; }
+            .redirect-overlay { padding: 1.25rem; }
+            .redirect-overlay { align-items: center; justify-content: center; }
+            .redirect-overlay .big-spinner { width: 56px; height: 56px; }
+            .redirect-overlay > div[style] { flex-direction: column; }
+            .redirect-overlay button.modal-contact-btn { width: 100%; }
+            .modal-body { padding: 1rem; }
+            .room-full-overlay h3 { font-size: 1.6rem; }
+            .hero { height: 38vh; min-height: 220px; }
+        }
     </style>
 </head>
 <body>
@@ -154,6 +173,7 @@
                 <div class="room-image-wrapper">
                     <img src="images/5k1.jpg" alt="Budget 1BHK Rooftop" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'><rect width=\'100%\' height=\'100%\' fill=\'%23333\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'16\' fill=\'white\' text-anchor=\'middle\'>Image Missing</text></svg>'">
                     <span class="room-price-badge">₹5,000 / mo</span>
+                    <span class="room-status-badge"></span>
                 </div>
                 <div class="room-details">
                     <h3>Budget 1BHK Rooftop</h3>
@@ -169,6 +189,7 @@
                 <div class="room-image-wrapper">
                     <img src="images/8k1.jpg" alt="Standard 2BHK Setup" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'><rect width=\'100%\' height=\'100%\' fill=\'%23333\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'16\' fill=\'white\' text-anchor=\'middle\'>Image Missing</text></svg>'">
                     <span class="room-price-badge">₹8,000 / mo</span>
+                    <span class="room-status-badge"></span>
                 </div>
                 <div class="room-details">
                     <h3>Standard 2BHK Setup</h3>
@@ -184,6 +205,7 @@
                 <div class="room-image-wrapper">
                     <img src="images/10k1.jpg" alt="Spacious 2BHK + Kitchen" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'><rect width=\'100%\' height=\'100%\' fill=\'%23333\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'16\' fill=\'white\' text-anchor=\'middle\'>Image Missing</text></svg>'">
                     <span class="room-price-badge">₹10,000 / mo</span>
+                    <span class="room-status-badge"></span>
                 </div>
                 <div class="room-details">
                     <h3>Spacious 2BHK + Kitchen</h3>
@@ -199,6 +221,7 @@
                 <div class="room-image-wrapper">
                     <img src="images/15k1.jpg" alt="Premium 1250 sq ft Suite" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'><rect width=\'100%\' height=\'100%\' fill=\'%23333\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'16\' fill=\'white\' text-anchor=\'middle\'>Image Missing</text></svg>'">
                     <span class="room-price-badge">₹15,000 / mo</span>
+                    <span class="room-status-badge"></span>
                 </div>
                 <div class="room-details">
                     <h3>Premium 1250 sq ft Suite</h3>
@@ -234,6 +257,7 @@
                 <ul class="modal-features-list" id="modalFeatures"></ul>
 
                 <button class="modal-contact-btn" id="openInquiryBtn">Inquire About This Room</button>
+                <button class="modal-contact-btn" id="roomTermsBtn" style="background-color:#6c757d;margin-top:0.6rem;">Terms & Conditions</button>
             </div>
         </div>
     </div>
@@ -271,7 +295,9 @@
                         <input type="number" id="inqDays" min="0" placeholder="How soon do you need it?">
                     </div>
                     
-                    <button type="submit" class="modal-contact-btn" style="background-color: var(--accent-cyan); color: #121212;">Submit & Open WhatsApp</button>
+                    <div style="display:flex; flex-direction:column; gap:0.6rem;">
+                        <button type="submit" class="modal-contact-btn" style="background-color: var(--accent-cyan); color: #121212;">Submit & Open WhatsApp</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -280,7 +306,64 @@
     <div class="redirect-overlay" id="redirectOverlay">
         <div class="big-spinner"></div>
         <h2>Redirecting to WhatsApp...</h2>
-        <p><strong>Please note:</strong> Avoid calling the number directly. Kindly drop the pre-filled message, and we will get back to you shortly!</p>
+        <p id="redirectNotice"><strong>Please note:</strong> Avoid calling the number directly. Kindly drop the pre-filled message, and we will get back to you shortly!</p>
+        <div id="redirectCountdown" style="font-size:1.25rem; margin-top:0.8rem; font-weight:700;">15</div>
+        <div style="display:flex; gap:0.6rem; margin-top:1rem;">
+            <button id="overlayTermsBtn" class="modal-contact-btn" style="background-color:#6c757d;">View Terms & Conditions</button>
+            <button id="overlayInstantBtn" class="modal-contact-btn" style="background-color:#2ecc71; color:#081012;">Go to WhatsApp Now</button>
+        </div>
+    </div>
+
+    <!-- Full-screen Terms Overlay (in-page) -->
+    <div class="modal-overlay" id="termsOverlay">
+        <div class="modal-content" style="max-width:900px; width:95%; max-height:95vh; overflow:auto;">
+            <button class="close-modal-btn" id="closeTermsBtn">×</button>
+            <div class="modal-body">
+                <h2>Terms & Conditions</h2>
+                <div id="termsContent" style="color:var(--text-muted); margin-bottom:1rem;">
+                    <ul id="termsList">
+                        <!-- START TERMS LIST HERE -->
+                    <li>Electricity bill is 10 rupee per unit as price for water and other small things will be included into it and you don,t have to pay for water cost and other seperately</li>
+                    <li>2 months of rent in advance is necessory to get the room as it is also a sequerty diposit (rent of the room X 2 months)</li>
+                    <li>You should keep the responsiblity of room keeping it clean </li> 
+                    <li>Activities like smoking or alchol is not enertained and we vaule owr reputation over money if your activites are causing any problems like property damage or disturbing neighbouring people living in flat we will not hesitate to kick you out</li>
+                     <li>And follow these rules and enjoy your stay</li>
+                    </ul>
+
+                    <form id="termsForm" style="margin-top:1rem;">
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input type="text" id="termsName" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label>Contact Number (WhatsApp) *</label>
+                            <input type="tel" id="termsContact" placeholder="e.g. +91 9876543210">
+                        </div>
+                        <div class="form-group">
+                            <label>Occupation / Job</label>
+                            <input type="text" id="termsJob" placeholder="Student, Software Engineer, etc.">
+                        </div>
+                        <div class="form-group">
+                            <label>How many people will live?</label>
+                            <input type="number" id="termsPeople" min="1" placeholder="e.g. 1 or 2">
+                        </div>
+                        <div class="form-group">
+                            <label>Where are you from?</label>
+                            <input type="text" id="termsFrom" placeholder="Near Orion mall, Kushmi etc..">
+                        </div>
+                        <div class="form-group">
+                            <label>Move-in timeline (Days)</label>
+                            <input type="number" id="termsDays" min="0" placeholder="How soon do you need it?">
+                        </div>
+
+                        <div style="display:flex; gap:0.6rem;">
+                            <button type="submit" id="termsSubmitBtn" class="modal-contact-btn" style="background-color:#25D366; color:white;">Agree & Open WhatsApp</button>
+                            <button type="button" id="termsCloseOnlyBtn" class="modal-contact-btn" style="background-color:#6c757d;">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -303,12 +386,14 @@
         });
 
         // --- Room Database ---
+        // `isVacant`: false = full (red), true = vacant (green)
         const roomDatabase = {
             'room-5k': { 
                 prefix: '5k', 
                 imageCount: 5, 
                 title: 'Budget 1BHK Rooftop', 
                 price: '₹5,000 / month', 
+                isVacant: false,
                 desc: 'Located on the airy 3rd floor, this 1BHK rooftop room includes a bathroom and takes full advantage of the naturally cooler climate near Ramgarh Tal. It features fully tiled floors, pre-installed fans and lights, and a dedicated insect-netted ventilation area to keep the breeze flowing without the bugs.', 
                 features: ['1BHK Rooftop (3rd Floor)', 'Bathroom Included', 'Tiled Floors & Well-Ventilated', 'Mosquito Net Covers', 'Fans & Lights Installed'] 
             },
@@ -317,6 +402,7 @@
                 imageCount: 5, 
                 title: 'Standard 2BHK Setup', 
                 price: '₹8,000 / month', 
+                isVacant: true,
                 desc: 'A practical 2BHK layout featuring fully tiled floors and naturally cooler, mosquito-netted ventilation. This unit includes its own individual bathroom and two built-in 4-layer brick shelves, providing excellent space to organize books, cooking items, and daily essentials.', 
                 features: ['2 Rooms (2BHK)', 'Individual Bathroom', 'Two 4-Layer Brick Shelves', 'Tiled & Well-Ventilated', 'Mosquito Net Covers', 'Fans & Lights Installed'] 
             },
@@ -325,6 +411,7 @@
                 imageCount: 10, 
                 title: 'Spacious 2BHK + Kitchen Area', 
                 price: '₹10,000 / month', 
+                isVacant: true,
                 desc: 'Building on the 2BHK layout, this unit provides slightly more area and adds a dedicated kitchen space directly within one of the two rooms. Enjoy a naturally cooler environment near Ramgarh Tal, complete with tiled floors, pre-installed fans and lights, and safe, netted ventilation.', 
                 features: ['Larger 2BHK Layout', 'In-Room Kitchen Area', 'Individual Bathroom', '4-Layer Brick Shelves', 'Tiled Floors & Mosquito Net Covers', 'Fans & Lights Installed'] 
             },
@@ -333,10 +420,13 @@
                 imageCount: 12, 
                 title: 'Premium 1250 sq ft Suite', 
                 price: '₹15,000 / month', 
+                isVacant: true,
                 desc: 'An out-of-the-league, massive 1250 sq ft living space, roughly double the size of our 10k rooms. This layout features a gigantic hall, two bedrooms, two bathrooms, and a fully separate kitchen area. A window directly overlooks Ramgarh Tal, keeping the tiled, well-ventilated space naturally cool.', 
                 features: ['1250 Sq Ft Area', 'Gigantic Hall', '2 Bedrooms & 2 Bathrooms', 'Separate Kitchen Area', 'Ramgarh Tal Window View', 'Tiled Floors & Net Ventilation', 'Fans & Lights Installed'] 
             }
         };
+
+        const TARGET_PHONE = "918400782070";
 
         const roomModal = document.getElementById('roomModal');
         const inquiryModal = document.getElementById('inquiryModal');
@@ -357,14 +447,22 @@
                 
                 imageCounter.textContent = "Loading...";
                 let checkPromises = [];
-                
-                for(let i = 1; i <= data.imageCount; i++) {
-                    let imgPath = `images/${data.prefix}${i}.jpg`;
-                    let p = new Promise((resolve) => {
-                        let img = new Image();
-                        img.onload = () => resolve(imgPath); 
-                        img.onerror = () => resolve(null);   
-                        img.src = imgPath;
+                for (let i = 1; i <= data.imageCount; i++) {
+                    const p = new Promise((resolve) => {
+                        const exts = ['jpg', 'jpeg', 'png'];
+                        let tried = 0;
+
+                        function tryNext() {
+                            if (tried >= exts.length) return resolve(null);
+                            const ext = exts[tried++];
+                            const imgPath = `images/${data.prefix}${i}.${ext}`;
+                            const img = new Image();
+                            img.onload = () => resolve(imgPath);
+                            img.onerror = () => tryNext();
+                            img.src = imgPath;
+                        }
+
+                        tryNext();
                     });
                     checkPromises.push(p);
                 }
@@ -387,11 +485,60 @@
                         const li = document.createElement('li'); li.textContent = f; featuresList.appendChild(li);
                     });
 
+                    // Update inquiry button based on vacancy
+                    const openInquiryBtnEl = document.getElementById('openInquiryBtn');
+                    if (!data.isVacant) {
+                        openInquiryBtnEl.textContent = 'Room is taken — sorry';
+                        openInquiryBtnEl.disabled = true;
+                        openInquiryBtnEl.style.opacity = '0.6';
+                        openInquiryBtnEl.style.cursor = 'not-allowed';
+                    } else {
+                        openInquiryBtnEl.textContent = 'Inquire About This Room';
+                        openInquiryBtnEl.disabled = false;
+                        openInquiryBtnEl.style.opacity = '1';
+                        openInquiryBtnEl.style.cursor = 'pointer';
+                    }
+
+                    // ensure status badges reflect current data
+                    renderStatusBadges();
+
                     roomModal.classList.add('active');
                     document.body.style.overflow = 'hidden';
                 });
             });
         });
+
+        // Render status badges for each card based on roomDatabase
+        function renderStatusBadges() {
+            Object.keys(roomDatabase).forEach(id => {
+                const card = document.querySelector(`.room-card[data-id="${id}"]`);
+                const badge = card.querySelector('.room-status-badge');
+                if (!badge) return;
+                const isVacant = roomDatabase[id].isVacant;
+                
+                badge.textContent = isVacant ? 'Vacant' : 'Full';
+                badge.classList.remove('status-vacant', 'status-full');
+                badge.classList.add(isVacant ? 'status-vacant' : 'status-full');
+
+                // Add or remove full-room overlay and styling
+                let overlay = card.querySelector('.room-full-overlay');
+                if (!isVacant) {
+                    card.classList.add('room-full');
+                    if (!overlay) {
+                        overlay = document.createElement('div');
+                        overlay.className = 'room-full-overlay';
+                        overlay.innerHTML = '<h3>OCCUPIED</h3>';
+                        card.appendChild(overlay);
+                    }
+                } else {
+                    card.classList.remove('room-full');
+                    if (overlay) overlay.remove();
+                }
+            });
+        }
+
+        // initialize status badges
+        renderStatusBadges();
 
         // --- Carousel Controls with Loading State ---
         function updateCarouselUI() {
@@ -422,7 +569,9 @@
         });
 
         // --- Open Inquiry Form ---
-        document.getElementById('openInquiryBtn').addEventListener('click', () => {
+        const openInquiryBtnRef = document.getElementById('openInquiryBtn');
+        openInquiryBtnRef.addEventListener('click', () => {
+            if (openInquiryBtnRef.disabled) return;
             roomModal.classList.remove('active');
             document.getElementById('inquiryRoomName').textContent = `Inquiring for: ${selectedRoomTitle} (${selectedRoomPrice})`;
             inquiryModal.classList.add('active');
@@ -451,25 +600,126 @@
                             `*From:* ${from}%0A` +
                             `*Moving in:* ${days} days`;
                             
-            const targetPhone = "918400782070";
+            const targetPhone = TARGET_PHONE;
             const waUrl = `https://wa.me/${targetPhone}?text=${message}`;
             
-            // Close form, show redirect loading screen
+            // Close form, show redirect loading screen with countdown and overlay controls
             inquiryModal.classList.remove('active');
-            document.getElementById('redirectOverlay').style.display = 'flex';
-            
-            // Redirect after 3 seconds
-            setTimeout(() => {
-                window.location.href = waUrl;
-                
-                // Reset form in background in case user navigates back
-                setTimeout(() => {
-                    document.getElementById('redirectOverlay').style.display = 'none';
-                    document.getElementById('inquiryForm').reset();
-                    document.body.style.overflow = 'auto';
-                }, 1000);
-            }, 3000);
+            const overlay = document.getElementById('redirectOverlay');
+            const countdownEl = document.getElementById('redirectCountdown');
+            overlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+
+            // start a visible 15s countdown
+            let remaining = 15;
+            countdownEl.textContent = remaining;
+            // store last URL/message so overlay buttons can use it
+            window.__lastWaUrl = waUrl;
+            window.__lastMessage = message;
+            // store last form data so Terms overlay can reuse it
+            window.__lastForm = { name, contact, job, people, from, days, room: selectedRoomTitle };
+
+            window.__redirectTimer = setInterval(() => {
+                remaining -= 1;
+                countdownEl.textContent = remaining;
+                if (remaining <= 0) {
+                    clearInterval(window.__redirectTimer);
+                    // navigate
+                    window.location.href = waUrl;
+                }
+            }, 1000);
         });
+
+        // Overlay button handlers: View Terms and Instant Redirect
+        document.getElementById('overlayInstantBtn').addEventListener('click', () => {
+            // open last WA url immediately in new tab and stop countdown
+            if (window.__redirectTimer) { clearInterval(window.__redirectTimer); window.__redirectTimer = null; }
+            const url = window.__lastWaUrl || (`https://wa.me/${TARGET_PHONE}`);
+            window.open(url, '_blank');
+            document.getElementById('redirectOverlay').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        document.getElementById('overlayTermsBtn').addEventListener('click', () => {
+            // stop countdown and show in-page full-screen terms overlay
+            if (window.__redirectTimer) { clearInterval(window.__redirectTimer); window.__redirectTimer = null; }
+            document.getElementById('redirectOverlay').style.display = 'none';
+            showTermsOverlay(window.__lastMessage || '');
+        });
+
+        // room-level Terms button
+        document.getElementById('roomTermsBtn').addEventListener('click', () => {
+            // when opening from room info, ensure no redirect timer is running
+            if (window.__redirectTimer) { clearInterval(window.__redirectTimer); window.__redirectTimer = null; }
+            showTermsOverlay('');
+        });
+
+        // Terms overlay controls
+        document.getElementById('closeTermsBtn').addEventListener('click', () => {
+            document.getElementById('termsOverlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        document.getElementById('termsCloseOnlyBtn').addEventListener('click', () => {
+            document.getElementById('termsOverlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Terms form submission (used when user agrees after reading Terms)
+        document.getElementById('termsForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('termsName').value || (window.__lastForm && window.__lastForm.name) || '';
+            const contact = document.getElementById('termsContact').value || (window.__lastForm && window.__lastForm.contact) || '';
+            const job = document.getElementById('termsJob').value || (window.__lastForm && window.__lastForm.job) || 'Not specified';
+            const people = document.getElementById('termsPeople').value || (window.__lastForm && window.__lastForm.people) || 'Not specified';
+            const from = document.getElementById('termsFrom').value || (window.__lastForm && window.__lastForm.from) || 'Not specified';
+            const days = document.getElementById('termsDays').value || (window.__lastForm && window.__lastForm.days) || 'Not specified';
+            const roomName = (window.__lastForm && window.__lastForm.room) || selectedRoomTitle || 'Room';
+
+            const message = `*New Room Inquiry*%0A` +
+                            `------------------------%0A` +
+                            `*Room:* ${roomName}%0A` +
+                            `*Name:* ${name}%0A` +
+                            `*Contact:* ${contact}%0A` +
+                            `*Job:* ${job}%0A` +
+                            `*People:* ${people}%0A` +
+                            `*From:* ${from}%0A` +
+                            `*Moving in:* ${days} days`;
+
+            const waUrl = `https://wa.me/${TARGET_PHONE}?text=${message}`;
+            window.open(waUrl, '_blank');
+            document.getElementById('termsOverlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        function showTermsOverlay(preFilledMessage) {
+            // populate lastMessage and prefill fields from lastForm if present
+            window.__lastMessage = preFilledMessage || window.__lastMessage || '';
+            const f = window.__lastForm || {};
+            document.getElementById('termsName').value = f.name || '';
+            document.getElementById('termsContact').value = f.contact || '';
+            document.getElementById('termsJob').value = f.job || '';
+            document.getElementById('termsPeople').value = f.people || '';
+            document.getElementById('termsFrom').value = f.from || '';
+            document.getElementById('termsDays').value = f.days || '';
+
+            document.getElementById('termsOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openTermsWindow(preFilledMessage) {
+            const w = window.open('', '_blank', 'width=600,height=700');
+            if (!w) return alert('Popup blocked. Please allow popups for instant Terms view.');
+            const html = `<!doctype html><html><head><title>Terms & Conditions</title><meta charset="utf-8"><style>body{font-family:Arial,Helvetica,sans-serif;padding:20px;} h1{color:#7b2cbf;} .terms{margin-bottom:20px;} .wa-btn{display:inline-block;padding:12px 18px;background:#25D366;color:#fff;border-radius:8px;text-decoration:none;font-weight:700;}</style></head><body>` +
+                `<h1>Terms & Conditions</h1>` +
+                `<div class="terms"><p><strong>Rent & Charges:</strong> Monthly rent as listed. Electricity and other utilities are billed separately based on actual usage and shared rules.</p>` +
+                `<p><strong>Advance:</strong> Security deposit / advance required as per agreement.</p>` +
+                `<p><strong>Other:</strong> Maintain cleanliness, no unauthorized alterations, follow house rules.</p></div>` +
+                `<p>If you agree, click below to open WhatsApp with your filled details.</p>` +
+                `<a id="agreeWa" class="wa-btn" href="https://wa.me/${TARGET_PHONE}?text=${preFilledMessage}" target="_blank">Agree & Open WhatsApp</a>` +
+                `</body></html>`;
+            w.document.write(html);
+            w.document.close();
+        }
 
         // --- Close Modals General Logic ---
         document.getElementById('closeRoomModal').addEventListener('click', () => {
@@ -486,3 +736,4 @@
     </script>
 </body>
 </html>
+
