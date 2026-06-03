@@ -411,7 +411,7 @@
                 imageCount: 10, 
                 title: 'Spacious 2BHK + Kitchen Area', 
                 price: '₹10,000 / month', 
-                isVacant: true,
+                isVacant: false,
                 desc: 'Building on the 2BHK layout, this unit provides slightly more area and adds a dedicated kitchen space directly within one of the two rooms. Enjoy a naturally cooler environment near Ramgarh Tal, complete with tiled floors, pre-installed fans and lights, and safe, netted ventilation.', 
                 features: ['Larger 2BHK Layout', 'In-Room Kitchen Area', 'Individual Bathroom', '4-Layer Brick Shelves', 'Tiled Floors & Mosquito Net Covers', 'Fans & Lights Installed'] 
             },
@@ -438,47 +438,60 @@
         let selectedRoomTitle = ""; 
         let selectedRoomPrice = "";
 
-        // --- Open Main Room Modal & Pre-load Images ---
+        // Helper: try image paths for given prefix and index (returns first existing path or null)
+        function loadImagePath(prefix, index) {
+            return new Promise(resolve => {
+                const exts = ['jpg', 'jpeg', 'png'];
+                let tried = 0;
+                function tryNext() {
+                    if (tried >= exts.length) return resolve(null);
+                    const ext = exts[tried++];
+                    const imgPath = `images/${prefix}${index}.${ext}`;
+                    const img = new Image();
+                    img.onload = () => resolve(imgPath);
+                    img.onerror = () => tryNext();
+                    img.src = imgPath;
+                }
+                tryNext();
+            });
+        }
+
+        // Helper: reorder room cards so vacant rooms appear first
+        function sortRoomCards() {
+            const grid = document.querySelector('.rooms-grid');
+            const cards = Array.from(grid.querySelectorAll('.room-card'));
+            cards.sort((a, b) => {
+                const aVac = roomDatabase[a.getAttribute('data-id')].isVacant ? 0 : 1;
+                const bVac = roomDatabase[b.getAttribute('data-id')].isVacant ? 0 : 1;
+                return aVac - bVac;
+            });
+            cards.forEach(c => grid.appendChild(c));
+        }
+
+        // --- Open Main Room Modal (lazy image loading) ---
         document.querySelectorAll('.room-card').forEach(card => {
             card.addEventListener('click', () => {
                 const data = roomDatabase[card.getAttribute('data-id')];
                 selectedRoomTitle = data.title;
                 selectedRoomPrice = data.price;
-                
-                imageCounter.textContent = "Loading...";
-                let checkPromises = [];
-                for (let i = 1; i <= data.imageCount; i++) {
-                    const p = new Promise((resolve) => {
-                        const exts = ['jpg', 'jpeg', 'png'];
-                        let tried = 0;
 
-                        function tryNext() {
-                            if (tried >= exts.length) return resolve(null);
-                            const ext = exts[tried++];
-                            const imgPath = `images/${data.prefix}${i}.${ext}`;
-                            const img = new Image();
-                            img.onload = () => resolve(imgPath);
-                            img.onerror = () => tryNext();
-                            img.src = imgPath;
-                        }
+                imageCounter.textContent = 'Loading...';
+                currentImagesArray = [];
+                currentImageIndex = 0;
 
-                        tryNext();
-                    });
-                    checkPromises.push(p);
-                }
-
-                Promise.all(checkPromises).then(results => {
-                    currentImagesArray = results.filter(item => item !== null);
-                    if(currentImagesArray.length === 0) {
-                        currentImagesArray.push("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='400'><rect width='100%' height='100%' fill='%23111'/><text x='50%' y='50%' font-family='sans-serif' font-size='20' fill='white' text-anchor='middle'>No Images Found</text></svg>");
+                // Load only the first image immediately, open modal, then prefetch others
+                loadImagePath(data.prefix, 1).then(firstPath => {
+                    if (!firstPath) {
+                        firstPath = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='400'><rect width='100%' height='100%' fill='%23111'/><text x='50%' y='50%' font-family='sans-serif' font-size='20' fill='white' text-anchor='middle'>No Images Found</text></svg>";
                     }
+                    currentImagesArray.push(firstPath);
                     currentImageIndex = 0;
                     updateCarouselUI();
 
                     document.getElementById('modalTitle').textContent = data.title;
                     document.getElementById('modalPrice').textContent = data.price;
                     document.getElementById('modalDesc').textContent = data.desc;
-                    
+
                     const featuresList = document.getElementById('modalFeatures');
                     featuresList.innerHTML = '';
                     data.features.forEach(f => {
@@ -499,11 +512,21 @@
                         openInquiryBtnEl.style.cursor = 'pointer';
                     }
 
-                    // ensure status badges reflect current data
+                    // ensure status badges reflect current data and open modal
                     renderStatusBadges();
-
                     roomModal.classList.add('active');
                     document.body.style.overflow = 'hidden';
+
+                    // Prefetch remaining images in background (do not block opening)
+                    for (let i = 2; i <= data.imageCount; i++) {
+                        loadImagePath(data.prefix, i).then(path => {
+                            if (path) {
+                                currentImagesArray.push(path);
+                                // update image counter to reflect new available images
+                                imageCounter.textContent = `${currentImageIndex + 1} / ${currentImagesArray.length}`;
+                            }
+                        });
+                    }
                 });
             });
         });
@@ -538,7 +561,7 @@
         }
 
         // initialize status badges
-        renderStatusBadges();
+        renderStatusBadges(); sortRoomCards();
 
         // --- Carousel Controls with Loading State ---
         function updateCarouselUI() {
@@ -736,4 +759,3 @@
     </script>
 </body>
 </html>
-
