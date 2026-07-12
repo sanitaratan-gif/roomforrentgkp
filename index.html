@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Affordable and premium rooms available for rent near Ramgarh Tal, Gorakhpur. Choose from 5k, 8k, 10k, or 15k rooms.">
+    <meta name="description" content="Affordable and premium rooms available for rent near Ramgarh Tal, Gorakhpur. Choose from 4k, 5k, 8k, 10k, or 15k rooms.">
     <title>Rental Rooms GKP - Premium House & Rooms</title>
     
     <style>
@@ -47,14 +47,14 @@
         .theme-toggle-btn:hover { background-color: var(--accent-cyan); color: #121212; }
 
         /* Hero Section */
-        .hero { position: relative; width: 100%; height: 60vh; min-height: 350px; background: linear-gradient(rgba(123, 44, 191, 0.4), rgba(0, 180, 216, 0.4)), url('images/homepage.jpg') no-repeat center center/cover; background-color: var(--accent-purple); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 1.5rem; }
+        .hero { position: relative; width: 100%; height: 40vh; min-height: 280px; background: linear-gradient(rgba(123, 44, 191, 0.4), rgba(0, 180, 216, 0.4)), url('images/homepage.jpg') no-repeat center center/cover; background-color: var(--accent-purple); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 1.5rem; }
         .hero h1 { color: #ffffff; font-size: 2.2rem; font-weight: 800; margin-bottom: 0.75rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
         .hero p { color: #f1f2f6; font-size: 1.1rem; max-width: 600px; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
-        main { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
+        main { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
 
         /* Quick Info */
         .quick-info { background-color: var(--bg-secondary); padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px var(--card-shadow); margin-bottom: 2.5rem; text-align: center; border-left: 5px solid var(--accent-cyan); }
-        .maps-btn { display: inline-block; background-color: var(--accent-purple); color: white; text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; margin-top: 1rem; position: relative; overflow: hidden; border: none; }
+        .maps-btn { display: inline-block; background-color: var(--accent-purple); color: white; text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; margin-top: 1rem; position: relative; overflow: hidden; border: none; cursor: pointer; }
         .maps-btn::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%); transform: skewX(-25deg); animation: buttonSweep 4s infinite; }
         @keyframes buttonSweep { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
         .maps-btn:hover { background-color: var(--accent-purple-hover); }
@@ -63,16 +63,16 @@
         .section-title { font-size: 1.75rem; margin-bottom: 1.5rem; text-align: center; position: relative; color: var(--accent-purple); }
         .section-title::after { content: ''; display: block; width: 50px; height: 4px; background-color: var(--accent-cyan); margin: 0.5rem auto 0; border-radius: 2px; }
         .rooms-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-        .room-card { background-color: var(--bg-secondary); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 8px var(--card-shadow); border: 1px solid var(--border-color); display: flex; flex-direction: column; cursor: pointer; position: relative; }
+        .room-card { background-color: var(--bg-secondary); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 8px var(--card-shadow); border: 1px solid var(--border-color); display: flex; flex-direction: column; cursor: pointer; position: relative; transform: translateY(0); transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
         .room-card:hover { transform: translateY(-8px); box-shadow: 0 8px 16px rgba(0, 180, 216, 0.3); border-color: var(--accent-cyan); }
-        .room-card.room-full { opacity: 0.6; background-color: #e0e0e0; cursor: not-allowed; }
-        .room-card.room-full:hover { transform: none; box-shadow: 0 4px 8px var(--card-shadow); }
-        .room-full-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 100; border-radius: 12px; }
-        .room-full-overlay h3 { color: white; font-size: 2rem; font-weight: 900; text-shadow: 0 2px 8px rgba(0,0,0,0.8); text-align: center; letter-spacing: 1px; }
+        .room-card.room-full { opacity: 0.65; cursor: not-allowed; }
+        .room-card.room-full:hover { transform: none; box-shadow: 0 4px 8px var(--card-shadow); border-color: var(--border-color); }
+        .room-full-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 10; border-radius: 12px; }
+        .room-full-overlay h3 { color: white; font-size: 1.8rem; font-weight: 900; text-shadow: 0 2px 8px rgba(0,0,0,0.8); text-align: center; letter-spacing: 1px; }
         .room-image-wrapper { width: 100%; height: 220px; background-color: #333; position: relative; }
         .room-image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-        .room-price-badge { position: absolute; top: 1rem; left: 1rem; background-color: var(--accent-purple); color: white; padding: 0.3rem 0.8rem; border-radius: 6px; font-weight: 700; font-size: 0.9rem; }
-        .room-status-badge { position: absolute; top: 1rem; right: 1rem; padding: 0.3rem 0.8rem; border-radius: 6px; font-weight: 700; font-size: 0.85rem; color: white; }
+        .room-price-badge { position: absolute; top: 1rem; left: 1rem; background-color: var(--accent-purple); color: white; padding: 0.3rem 0.8rem; border-radius: 6px; font-weight: 700; font-size: 0.9rem; z-index: 5; }
+        .room-status-badge { position: absolute; top: 1rem; right: 1rem; padding: 0.3rem 0.8rem; border-radius: 6px; font-weight: 700; font-size: 0.85rem; color: white; z-index: 5; }
         .status-vacant { background-color: #2ecc71; }
         .status-full { background-color: #e74c3c; }
         .room-details { padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1; }
@@ -81,70 +81,86 @@
         .amenities { display: flex; flex-wrap: wrap; gap: 0.5rem; }
         .tag { background-color: var(--accent-cyan); border: 1px solid var(--accent-cyan); padding: 0.35rem 0.75rem; border-radius: 20px; font-size: 0.85rem; font-weight: 700; color: #121212; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
 
-        /* --- MODALS CSS --- */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 2000; justify-content: center; align-items: center; padding: 1rem; opacity: 0; transition: opacity 0.3s ease; }
+        /* Modals Structure */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); z-index: 2000; justify-content: center; align-items: center; padding: 1rem; opacity: 0; transition: opacity 0.3s ease; }
         .modal-overlay.active { display: flex; opacity: 1; }
         .modal-content { background-color: var(--bg-secondary); width: 100%; max-width: 650px; max-height: 90vh; overflow-y: auto; border-radius: 12px; position: relative; transform: scale(0.9); transition: transform 0.3s ease; border-top: 6px solid var(--accent-purple); border-bottom: 6px solid var(--accent-cyan); }
         .modal-overlay.active .modal-content { transform: scale(1); }
-        .close-modal-btn { position: absolute; top: 0.5rem; right: 1rem; font-size: 2.5rem; color: white; cursor: pointer; background: rgba(0,0,0,0.5); border: none; line-height: 1; border-radius: 50%; width: 40px; height: 40px; z-index: 10; display: flex; justify-content: center; align-items: center; }
-        
-        #inquiryModal .close-modal-btn { color: var(--text-muted); background: none; font-size: 2rem; }
-        #inquiryModal .close-modal-btn:hover { color: var(--accent-purple); }
+        .close-modal-btn { position: absolute; top: 0.5rem; right: 1rem; font-size: 2.5rem; color: var(--text-muted); cursor: pointer; background: none; border: none; line-height: 1; z-index: 10; display: flex; justify-content: center; align-items: center; }
+        .close-modal-btn:hover { color: var(--accent-purple); }
 
-        /* Image Slider Area */
-        .carousel-container { position: relative; width: 100%; height: 300px; background-color: #111; }
-        .carousel-container img { width: 100%; height: 100%; object-fit: contain; transition: opacity 0.3s ease; }
+        /* Carousel inside Modal */
+        .carousel-container { position: relative; width: 100%; height: 320px; background-color: #111; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .carousel-container img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; }
         
         .img-loader { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border: 4px solid var(--border-color); border-top: 4px solid var(--accent-cyan); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; display: none; z-index: 2; }
         @keyframes spin { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
 
-        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(123, 44, 191, 0.8); color: white; border: none; padding: 0.8rem 1rem; cursor: pointer; font-size: 1.5rem; border-radius: 8px; z-index: 5; }
+        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(123, 44, 191, 0.8); color: white; border: none; padding: 0.8rem 1rem; cursor: pointer; font-size: 1.3rem; border-radius: 8px; z-index: 5; }
         .nav-btn:hover { background-color: var(--accent-cyan); color: #121212; }
         .prev-btn { left: 10px; }
         .next-btn { right: 10px; }
-        .image-counter { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold; }
+        .image-counter { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold; z-index: 5; }
 
         .modal-body { padding: 2rem; }
         .modal-body h2 { color: var(--accent-purple); margin-bottom: 0.5rem; font-size: 1.8rem; }
         .modal-price { display: inline-block; background-color: var(--accent-cyan); color: #121212; padding: 0.4rem 1rem; border-radius: 20px; font-weight: bold; margin-bottom: 1.5rem; }
         .modal-body p { color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem; }
         
-        .modal-features-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; list-style: none; padding: 0; }
+        .modal-features-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; list-style: none; padding: 0; margin-bottom: 1.5rem; }
         .modal-features-list li { position: relative; padding-left: 1.5rem; color: var(--text-main); }
         .modal-features-list li::before { content: '✓'; position: absolute; left: 0; color: var(--accent-purple); font-weight: bold; }
 
-        .modal-contact-btn { display: block; width: 100%; text-align: center; background-color: var(--accent-purple); color: white; padding: 1rem; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1.1rem; margin-top: 2rem; cursor: pointer; border: none; }
+        .modal-contact-btn { display: block; width: 100%; text-align: center; background-color: var(--accent-purple); color: white; padding: 1rem; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1.1rem; margin-top: 1rem; cursor: pointer; border: none; }
         .modal-contact-btn:hover { background-color: var(--accent-purple-hover); }
 
-        /* Form Specific Styles */
+        /* Form Controls */
         .form-group { margin-bottom: 1.2rem; text-align: left; }
         .form-group label { display: block; margin-bottom: 0.4rem; color: var(--text-main); font-weight: 600; font-size: 0.95rem; }
         .form-group input { width: 100%; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 6px; background-color: var(--bg-primary); color: var(--text-main); font-family: inherit; font-size: 1rem; }
         .form-group input:focus { outline: none; border-color: var(--accent-cyan); box-shadow: 0 0 0 2px rgba(0, 180, 216, 0.2); }
 
-        /* Redirect Overlay Screen */
+        /* Terms Box Display Styling */
+        .terms-display-box { background: var(--bg-primary); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color); max-height: 250px; overflow-y: auto; margin-bottom: 1.5rem; }
+        .terms-display-box ul { padding-left: 1.25rem; }
+        .terms-display-box li { margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.95rem; }
+
+        /* Redirect Screen Layer */
         .redirect-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--accent-purple); color: white; display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 3000; text-align: center; padding: 2rem; }
         .redirect-overlay .big-spinner { border: 6px solid rgba(255,255,255,0.2); border-top: 6px solid var(--accent-cyan); border-radius: 50%; width: 70px; height: 70px; animation: spin 1s linear infinite; margin-bottom: 2rem; }
         .redirect-overlay h2 { font-size: 2rem; margin-bottom: 1rem; }
-        .redirect-overlay p { font-size: 1.2rem; max-width: 600px; line-height: 1.6; color: #f4f4f9; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--accent-cyan); }
+        .redirect-overlay p { font-size: 1.1rem; max-width: 600px; line-height: 1.6; color: #f4f4f9; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--accent-cyan); }
+        .redirect-actions-row { display: flex; gap: 1rem; margin-top: 1.5rem; width: 100%; max-width: 500px; justify-content: center; }
 
+        /* Media Queries */
         @media (min-width: 768px) { .rooms-grid { grid-template-columns: repeat(2, 1fr); } .hero h1 { font-size: 3.2rem; } }
         @media (min-width: 1024px) { .rooms-grid { grid-template-columns: repeat(4, 1fr); } }
-        /* Mobile-specific tweaks */
+        
         @media (max-width: 768px) {
-            .modal-content { width: 96%; max-width: 96%; height: 100%; max-height: 100vh; border-radius: 8px; }
-            .redirect-overlay { padding: 1.25rem; }
-            .redirect-overlay { align-items: center; justify-content: center; }
-            .redirect-overlay .big-spinner { width: 56px; height: 56px; }
-            .redirect-overlay > div[style] { flex-direction: column; }
-            .redirect-overlay button.modal-contact-btn { width: 100%; }
-            .modal-body { padding: 1rem; }
-            .room-full-overlay h3 { font-size: 1.6rem; }
-            .hero { height: 38vh; min-height: 220px; }
+            .modal-content { width: 95%; max-height: 95vh; }
+            .redirect-actions-row { flex-direction: column; gap: 0.6rem; }
+            .modal-body { padding: 1.25rem; }
+            .modal-features-list { grid-template-columns: 1fr; gap: 0.5rem; }
+            .hero { height: 35vh; min-height: 240px; }
+            .hero h1 { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
+<!--hello-->
+<script>
+    /* 
+       VACANCY CONTROL CENTER
+       Change values to true (Vacant / Open / Green) or false (Occupied / Full / Red)
+    */
+    const ROOM_STATUS_CONFIG = {
+        '4k':  true,  // Budget Private Room
+        '5k':  false,  // Budget 1BHK Rooftop
+        '8k':  false,  // Standard 2BHK Setup
+        '10k': false,  // Spacious 2BHK + Kitchen
+        '15k': false   // Premium 1250 sq ft Suite
+    };
+</script>
 
     <header>
         <div class="logo">Rental Rooms GKP</div>
@@ -169,9 +185,25 @@
         
         <div class="rooms-grid">
             
+            <article class="room-card" data-id="room-4k">
+                <div class="room-image-wrapper">
+                    <img src="images/4k1.jpg" alt="Budget Private Room" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;100%&quot; height=&quot;100%&quot;><rect width=&quot;100%&quot; height=&quot;100%&quot; fill=&quot;%23333&quot;/><text x=&quot;50%&quot; y=&quot;50%&quot; font-family=&quot;sans-serif&quot; font-size=&quot;16&quot; fill=&quot;white&quot; text-anchor=&quot;middle&quot;&gt;Image Missing</text></svg>'">
+                    <span class="room-price-badge">₹4,000 / mo</span>
+                    <span class="room-status-badge"></span>
+                </div>
+                <div class="room-details">
+                    <h3>Budget Shared Room</h3>
+                    <p class="room-desc">A double, completely empty shared room with an shared bathroom. Simple layout featuring no separate kitchen spaces.</p>
+                    <div class="amenities">
+                        <span class="tag">Double Shared Room</span>
+                        <span class="tag">Private Bathroom</span>
+                    </div>
+                </div>
+            </article>
+
             <article class="room-card" data-id="room-5k">
                 <div class="room-image-wrapper">
-                    <img src="images/5k1.jpg" alt="Budget 1BHK Rooftop" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'><rect width=\'100%\' height=\'100%\' fill=\'%23333\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'16\' fill=\'white\' text-anchor=\'middle\'>Image Missing</text></svg>'">
+                    <img src="images/5k1.jpg" alt="Budget 1BHK Rooftop" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;100%&quot; height=&quot;100%&quot;><rect width=&quot;100%&quot; height=&quot;100%&quot; fill=&quot;%23333&quot;/><text x=&quot;50%&quot; y=&quot;50%&quot; font-family=&quot;sans-serif&quot; font-size=&quot;16&quot; fill=&quot;white&quot; text-anchor=&quot;middle&quot;&gt;Image Missing</text></svg>'">
                     <span class="room-price-badge">₹5,000 / mo</span>
                     <span class="room-status-badge"></span>
                 </div>
@@ -187,7 +219,7 @@
 
             <article class="room-card" data-id="room-8k">
                 <div class="room-image-wrapper">
-                    <img src="images/8k1.jpg" alt="Standard 2BHK Setup" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'><rect width=\'100%\' height=\'100%\' fill=\'%23333\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'16\' fill=\'white\' text-anchor=\'middle\'>Image Missing</text></svg>'">
+                    <img src="images/8k1.jpg" alt="Standard 2BHK Setup" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;100%&quot; height=&quot;100%&quot;><rect width=&quot;100%&quot; height=&quot;100%&quot; fill=&quot;%23333&quot;/><text x=&quot;50%&quot; y=&quot;50%&quot; font-family=&quot;sans-serif&quot; font-size=&quot;16&quot; fill=&quot;white&quot; text-anchor=&quot;middle&quot;&gt;Image Missing</text></svg>'">
                     <span class="room-price-badge">₹8,000 / mo</span>
                     <span class="room-status-badge"></span>
                 </div>
@@ -203,7 +235,7 @@
 
             <article class="room-card" data-id="room-10k">
                 <div class="room-image-wrapper">
-                    <img src="images/10k1.jpg" alt="Spacious 2BHK + Kitchen" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'><rect width=\'100%\' height=\'100%\' fill=\'%23333\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'16\' fill=\'white\' text-anchor=\'middle\'>Image Missing</text></svg>'">
+                    <img src="images/10k1.jpg" alt="Spacious 2BHK + Kitchen" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;100%&quot; height=&quot;100%&quot;><rect width=&quot;100%&quot; height=&quot;100%&quot; fill=&quot;%23333&quot;/><text x=&quot;50%&quot; y=&quot;50%&quot; font-family=&quot;sans-serif&quot; font-size=&quot;16&quot; fill=&quot;white&quot; text-anchor=&quot;middle&quot;&gt;Image Missing</text></svg>'">
                     <span class="room-price-badge">₹10,000 / mo</span>
                     <span class="room-status-badge"></span>
                 </div>
@@ -219,7 +251,7 @@
 
             <article class="room-card" data-id="room-15k">
                 <div class="room-image-wrapper">
-                    <img src="images/15k1.jpg" alt="Premium 1250 sq ft Suite" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'><rect width=\'100%\' height=\'100%\' fill=\'%23333\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'16\' fill=\'white\' text-anchor=\'middle\'>Image Missing</text></svg>'">
+                    <img src="images/15k1.jpg" alt="Premium 1250 sq ft Suite" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;100%&quot; height=&quot;100%&quot;><rect width=&quot;100%&quot; height=&quot;100%&quot; fill=&quot;%23333&quot;/><text x=&quot;50%&quot; y=&quot;50%&quot; font-family=&quot;sans-serif&quot; font-size=&quot;16&quot; fill=&quot;white&quot; text-anchor=&quot;middle&quot;&gt;Image Missing</text></svg>'">
                     <span class="room-price-badge">₹15,000 / mo</span>
                     <span class="room-status-badge"></span>
                 </div>
@@ -236,6 +268,7 @@
         </div>
     </main>
 
+    <!-- Room Details Modal -->
     <div class="modal-overlay" id="roomModal">
         <div class="modal-content">
             <button class="close-modal-btn" id="closeRoomModal">×</button>
@@ -257,11 +290,12 @@
                 <ul class="modal-features-list" id="modalFeatures"></ul>
 
                 <button class="modal-contact-btn" id="openInquiryBtn">Inquire About This Room</button>
-                <button class="modal-contact-btn" id="roomTermsBtn" style="background-color:#6c757d;margin-top:0.6rem;">Terms & Conditions</button>
+                <button class="modal-contact-btn" id="roomTermsBtn" style="background-color:#6c757d; margin-top:0.6rem;">Terms & Conditions</button>
             </div>
         </div>
     </div>
 
+    <!-- Application Form Inquiry Modal -->
     <div class="modal-overlay" id="inquiryModal">
         <div class="modal-content" style="max-width: 500px; border-top: 6px solid var(--accent-cyan); border-bottom: 6px solid var(--accent-purple);">
             <button class="close-modal-btn" id="closeInquiryModal">×</button>
@@ -288,79 +322,52 @@
                     </div>
                     <div class="form-group">
                         <label>Where are you from?</label>
-                        <input type="text" id="inqFrom" placeholder="Near Orion mall\ Kushmi etc..">
+                        <input type="text" id="inqFrom" placeholder="Near Orion mall, Kushmi etc.">
                     </div>
                     <div class="form-group">
                         <label>Move-in timeline (Days)</label>
                         <input type="number" id="inqDays" min="0" placeholder="How soon do you need it?">
                     </div>
                     
-                    <div style="display:flex; flex-direction:column; gap:0.6rem;">
-                        <button type="submit" class="modal-contact-btn" style="background-color: var(--accent-cyan); color: #121212;">Submit & Open WhatsApp</button>
-                    </div>
+                    <button type="submit" class="modal-contact-btn" style="background-color: var(--accent-cyan); color: #121212;">Submit & Review Info</button>
                 </form>
             </div>
         </div>
     </div>
 
+    <!-- Redirect Overlay Screen -->
     <div class="redirect-overlay" id="redirectOverlay">
         <div class="big-spinner"></div>
         <h2>Redirecting to WhatsApp...</h2>
         <p id="redirectNotice"><strong>Please note:</strong> Avoid calling the number directly. Kindly drop the pre-filled message, and we will get back to you shortly!</p>
-        <div id="redirectCountdown" style="font-size:1.25rem; margin-top:0.8rem; font-weight:700;">15</div>
-        <div style="display:flex; gap:0.6rem; margin-top:1rem;">
-            <button id="overlayTermsBtn" class="modal-contact-btn" style="background-color:#6c757d;">View Terms & Conditions</button>
-            <button id="overlayInstantBtn" class="modal-contact-btn" style="background-color:#2ecc71; color:#081012;">Go to WhatsApp Now</button>
+        <div id="redirectCountdown" style="font-size:2rem; margin-top:0.8rem; font-weight:700; color: var(--accent-cyan);">15</div>
+        <div class="redirect-actions-row">
+            <button id="overlayTermsBtn" class="modal-contact-btn" style="background-color:#6c757d; margin-top:0;">Read Terms & Conditions</button>
+            <button id="overlayInstantBtn" class="modal-contact-btn" style="background-color:#2ecc71; color:#081012; margin-top:0;">Go to WhatsApp Now</button>
         </div>
     </div>
 
-    <!-- Full-screen Terms Overlay (in-page) -->
+    <!-- Terms & Conditions Overlay -->
     <div class="modal-overlay" id="termsOverlay">
-        <div class="modal-content" style="max-width:900px; width:95%; max-height:95vh; overflow:auto;">
+        <div class="modal-content" style="max-width:600px; width:95%;">
             <button class="close-modal-btn" id="closeTermsBtn">×</button>
             <div class="modal-body">
                 <h2>Terms & Conditions</h2>
-                <div id="termsContent" style="color:var(--text-muted); margin-bottom:1rem;">
-                    <ul id="termsList">
-                        <!-- START TERMS LIST HERE -->
-                    <li>Electricity bill is 10 rupee per unit as price for water and other small things will be included into it and you don,t have to pay for water cost and other seperately</li>
-                    <li>1 months of rent in advance is necessory to get the room as it is also a sequirity diposit (rent of the room + 1 month rent of room)</li>
-                    <li>You should keep the responsiblity of room keeping it clean </li> 
-                    <li>Activities like smoking or alchol is not enertained and we vaule owr reputation over money if your activites are causing any problems like property damage or disturbing neighbouring people living in flat we will not hesitate to kick you out</li>
-                     <li>An increment of 5 percent every year will happen in every room or flat price </li>
+                <p style="font-size:0.9rem; margin-bottom:1rem;">Please review the basic lease rules below before proceeding to WhatsApp.</p>
+                
+                <div class="terms-display-box">
+                    <ul>
+                        <li>Electricity bill is ₹10 per unit. Water and minor maintenance expenses are included in this price, so no additional operational costs are billed separately.</li>
+                        <li>1 month of rent in advance is mandatory to secure the room, serving as a security deposit (Total initial payment = First month's rent + 1-month security deposit).</li>
+                        <li>Tenants must keep the room clean and maintain hygienic living standards.</li> 
+                        <li>Activities like smoking or alcohol consumption are strictly prohibited on properties. We value our community reputation over money; if dynamic issues like property damage or disturbance to neighbors occur, we reserve the right to evict.</li>
+                        <li>An annual rent increment of 5% applies to all flat tiers.</li>
                     </ul>
+                </div>
 
-                    <form id="termsForm" style="margin-top:1rem;">
-                        <div class="form-group">
-                            <label>Full Name *</label>
-                            <input type="text" id="termsName" placeholder="Enter your name">
-                        </div>
-                        <div class="form-group">
-                            <label>Contact Number (WhatsApp) *</label>
-                            <input type="tel" id="termsContact" placeholder="e.g. +91 9876543210">
-                        </div>
-                        <div class="form-group">
-                            <label>Occupation / Job</label>
-                            <input type="text" id="termsJob" placeholder="Student, Software Engineer, etc.">
-                        </div>
-                        <div class="form-group">
-                            <label>How many people will live?</label>
-                            <input type="number" id="termsPeople" min="1" placeholder="e.g. 1 or 2">
-                        </div>
-                        <div class="form-group">
-                            <label>Where are you from?</label>
-                            <input type="text" id="termsFrom" placeholder="Near Orion mall, Kushmi etc..">
-                        </div>
-                        <div class="form-group">
-                            <label>Move-in timeline (Days)</label>
-                            <input type="number" id="termsDays" min="0" placeholder="How soon do you need it?">
-                        </div>
-
-                        <div style="display:flex; gap:0.6rem;">
-                            <button type="submit" id="termsSubmitBtn" class="modal-contact-btn" style="background-color:#25D366; color:white;">Agree & Open WhatsApp</button>
-                            <button type="button" id="termsCloseOnlyBtn" class="modal-contact-btn" style="background-color:#6c757d;">Close</button>
-                        </div>
-                    </form>
+                <div style="display:flex; gap:0.6rem;">
+                    <button type="button" id="termsConfirmBtn" class="modal-contact-btn" style="background-color:#25D366; color:white; margin-top:0;">Accept & Send WhatsApp</button>
+                    <button type="button" id="termsCloseOnlyBtn" class="modal-contact-btn" style="background-color:#6c757d; margin-top:0;">Close</button>
                 </div>
             </div>
         </div>
@@ -386,15 +393,23 @@
         });
 
         // --- Room Database ---
-        // `isVacant`: false = full (red), true = vacant (green)
         const roomDatabase = {
+            'room-4k': { 
+                prefix: '4k', 
+                imageCount: 3, 
+                title: 'Budget Private Room', 
+                price: '₹4,000 / month', 
+                isVacant: ROOM_STATUS_CONFIG['4k'],
+                desc: 'A super affordable shared setup that includes 2 single empty room with an individual bathroom. This unit does not feature any kitchen , perfect for individuals looking for quiet, compact shared quarters.', 
+                features: ['2 Single Empty Room(Shared)', 'Shared Bathroom', 'Fan and lights installed', 'No Kitchen Area', 'Tiled Floors & Fans Installed'] 
+            },
             'room-5k': { 
                 prefix: '5k', 
                 imageCount: 5, 
                 title: 'Budget 1BHK Rooftop', 
                 price: '₹5,000 / month', 
-                isVacant: false,
-                desc: 'Located on the airy 3rd floor, this 1BHK rooftop room includes a bathroom and takes full advantage of the naturally cooler climate near Ramgarh Tal. It features fully tiled floors, pre-installed fans and lights, and a dedicated insect-netted ventilation area to keep the breeze flowing without the bugs.', 
+                isVacant: ROOM_STATUS_CONFIG['5k'],
+                desc: 'Located on the airy 3rd floor, this 1BHK rooftop room includes a bathroom and takes full advantage of the naturally cooler climate near Ramgarh Tal. It features fully tiled floors, pre-installed fans and lights, and a dedicated insect-netted ventilation area to keep the breeze flowing cleanly.', 
                 features: ['1BHK Rooftop (3rd Floor)', 'Bathroom Included', 'Tiled Floors & Well-Ventilated', 'Mosquito Net Covers', 'Fans & Lights Installed'] 
             },
             'room-8k': { 
@@ -402,7 +417,7 @@
                 imageCount: 5, 
                 title: 'Standard 2BHK Setup', 
                 price: '₹8,000 / month', 
-                isVacant: true,
+                isVacant: ROOM_STATUS_CONFIG['8k'],
                 desc: 'A practical 2BHK layout featuring fully tiled floors and naturally cooler, mosquito-netted ventilation. This unit includes its own individual bathroom and two built-in 4-layer brick shelves, providing excellent space to organize books, cooking items, and daily essentials.', 
                 features: ['2 Rooms (2BHK)', 'Individual Bathroom', 'Two 4-Layer Brick Shelves', 'Tiled & Well-Ventilated', 'Mosquito Net Covers', 'Fans & Lights Installed'] 
             },
@@ -411,7 +426,7 @@
                 imageCount: 10, 
                 title: 'Spacious 2BHK + Kitchen Area', 
                 price: '₹10,000 / month', 
-                isVacant: false,
+                isVacant: ROOM_STATUS_CONFIG['10k'],
                 desc: 'Building on the 2BHK layout, this unit provides slightly more area and adds a dedicated kitchen space directly within one of the two rooms. Enjoy a naturally cooler environment near Ramgarh Tal, complete with tiled floors, pre-installed fans and lights, and safe, netted ventilation.', 
                 features: ['Larger 2BHK Layout', 'In-Room Kitchen Area', 'Individual Bathroom', '4-Layer Brick Shelves', 'Tiled Floors & Mosquito Net Covers', 'Fans & Lights Installed'] 
             },
@@ -420,7 +435,7 @@
                 imageCount: 12, 
                 title: 'Premium 1250 sq ft Suite', 
                 price: '₹15,000 / month', 
-                isVacant: true,
+                isVacant: ROOM_STATUS_CONFIG['15k'],
                 desc: 'An out-of-the-league, massive 1250 sq ft living space, roughly double the size of our 10k rooms. This layout features a gigantic hall, two bedrooms, two bathrooms, and a fully separate kitchen area. A window directly overlooks Ramgarh Tal, keeping the tiled, well-ventilated space naturally cool.', 
                 features: ['1250 Sq Ft Area', 'Gigantic Hall', '2 Bedrooms & 2 Bathrooms', 'Separate Kitchen Area', 'Ramgarh Tal Window View', 'Tiled Floors & Net Ventilation', 'Fans & Lights Installed'] 
             }
@@ -430,15 +445,17 @@
 
         const roomModal = document.getElementById('roomModal');
         const inquiryModal = document.getElementById('inquiryModal');
+        const termsOverlay = document.getElementById('termsOverlay');
+        const redirectOverlay = document.getElementById('redirectOverlay');
         const modalImg = document.getElementById('modalImg');
         const imageCounter = document.getElementById('imageCounter');
         const imgLoader = document.getElementById('imgLoader');
+        
         let currentImagesArray = [];
         let currentImageIndex = 0;
         let selectedRoomTitle = ""; 
         let selectedRoomPrice = "";
 
-        // Helper: try image paths for given prefix and index (returns first existing path or null)
         function loadImagePath(prefix, index) {
             return new Promise(resolve => {
                 const exts = ['jpg', 'jpeg', 'png'];
@@ -456,7 +473,6 @@
             });
         }
 
-        // Helper: reorder room cards so vacant rooms appear first
         function sortRoomCards() {
             const grid = document.querySelector('.rooms-grid');
             const cards = Array.from(grid.querySelectorAll('.room-card'));
@@ -468,10 +484,10 @@
             cards.forEach(c => grid.appendChild(c));
         }
 
-        // --- Open Main Room Modal (lazy image loading) ---
         document.querySelectorAll('.room-card').forEach(card => {
             card.addEventListener('click', () => {
-                const data = roomDatabase[card.getAttribute('data-id')];
+                const id = card.getAttribute('data-id');
+                const data = roomDatabase[id];
                 selectedRoomTitle = data.title;
                 selectedRoomPrice = data.price;
 
@@ -479,13 +495,11 @@
                 currentImagesArray = [];
                 currentImageIndex = 0;
 
-                // Load only the first image immediately, open modal, then prefetch others
                 loadImagePath(data.prefix, 1).then(firstPath => {
                     if (!firstPath) {
                         firstPath = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='400'><rect width='100%' height='100%' fill='%23111'/><text x='50%' y='50%' font-family='sans-serif' font-size='20' fill='white' text-anchor='middle'>No Images Found</text></svg>";
                     }
                     currentImagesArray.push(firstPath);
-                    currentImageIndex = 0;
                     updateCarouselUI();
 
                     document.getElementById('modalTitle').textContent = data.title;
@@ -498,12 +512,11 @@
                         const li = document.createElement('li'); li.textContent = f; featuresList.appendChild(li);
                     });
 
-                    // Update inquiry button based on vacancy
                     const openInquiryBtnEl = document.getElementById('openInquiryBtn');
                     if (!data.isVacant) {
-                        openInquiryBtnEl.textContent = 'Room is taken — sorry';
+                        openInquiryBtnEl.textContent = 'Occupied — Details Only';
                         openInquiryBtnEl.disabled = true;
-                        openInquiryBtnEl.style.opacity = '0.6';
+                        openInquiryBtnEl.style.opacity = '0.5';
                         openInquiryBtnEl.style.cursor = 'not-allowed';
                     } else {
                         openInquiryBtnEl.textContent = 'Inquire About This Room';
@@ -512,17 +525,13 @@
                         openInquiryBtnEl.style.cursor = 'pointer';
                     }
 
-                    // ensure status badges reflect current data and open modal
-                    renderStatusBadges();
                     roomModal.classList.add('active');
                     document.body.style.overflow = 'hidden';
 
-                    // Prefetch remaining images in background (do not block opening)
                     for (let i = 2; i <= data.imageCount; i++) {
                         loadImagePath(data.prefix, i).then(path => {
                             if (path) {
                                 currentImagesArray.push(path);
-                                // update image counter to reflect new available images
                                 imageCounter.textContent = `${currentImageIndex + 1} / ${currentImagesArray.length}`;
                             }
                         });
@@ -531,19 +540,19 @@
             });
         });
 
-        // Render status badges for each card based on roomDatabase
         function renderStatusBadges() {
             Object.keys(roomDatabase).forEach(id => {
                 const card = document.querySelector(`.room-card[data-id="${id}"]`);
+                if (!card) return;
                 const badge = card.querySelector('.room-status-badge');
-                if (!badge) return;
                 const isVacant = roomDatabase[id].isVacant;
                 
-                badge.textContent = isVacant ? 'Vacant' : 'Full';
-                badge.classList.remove('status-vacant', 'status-full');
-                badge.classList.add(isVacant ? 'status-vacant' : 'status-full');
+                if (badge) {
+                    badge.textContent = isVacant ? 'Vacant' : 'Full';
+                    badge.classList.remove('status-vacant', 'status-full');
+                    badge.classList.add(isVacant ? 'status-vacant' : 'status-full');
+                }
 
-                // Add or remove full-room overlay and styling
                 let overlay = card.querySelector('.room-full-overlay');
                 if (!isVacant) {
                     card.classList.add('room-full');
@@ -560,18 +569,14 @@
             });
         }
 
-        // initialize status badges
-        renderStatusBadges(); sortRoomCards();
+        renderStatusBadges(); 
+        sortRoomCards();
 
-        // --- Carousel Controls with Loading State ---
         function updateCarouselUI() {
             imageCounter.textContent = `${currentImageIndex + 1} / ${currentImagesArray.length}`;
-            
-            // Show loading spinner, dim previous image
             imgLoader.style.display = 'block';
             modalImg.style.opacity = '0.3';
             
-            // Load new image in background
             const tempImg = new Image();
             tempImg.onload = function() {
                 modalImg.src = tempImg.src;
@@ -581,30 +586,32 @@
             tempImg.src = currentImagesArray[currentImageIndex];
         }
 
-        document.getElementById('nextImage').addEventListener('click', () => {
-            currentImageIndex = (currentImageIndex + 1) % currentImagesArray.length;
-            updateCarouselUI();
+        document.getElementById('nextImage').addEventListener('click', (e) => {
+            e.stopPropagation();
+            if(currentImagesArray.length > 0) {
+                currentImageIndex = (currentImageIndex + 1) % currentImagesArray.length;
+                updateCarouselUI();
+            }
         });
 
-        document.getElementById('prevImage').addEventListener('click', () => {
-            currentImageIndex = (currentImageIndex - 1 + currentImagesArray.length) % currentImagesArray.length;
-            updateCarouselUI();
+        document.getElementById('prevImage').addEventListener('click', (e) => {
+            e.stopPropagation();
+            if(currentImagesArray.length > 0) {
+                currentImageIndex = (currentImageIndex - 1 + currentImagesArray.length) % currentImagesArray.length;
+                updateCarouselUI();
+            }
         });
 
-        // --- Open Inquiry Form ---
-        const openInquiryBtnRef = document.getElementById('openInquiryBtn');
-        openInquiryBtnRef.addEventListener('click', () => {
-            if (openInquiryBtnRef.disabled) return;
+        document.getElementById('openInquiryBtn').addEventListener('click', () => {
+            if (document.getElementById('openInquiryBtn').disabled) return;
             roomModal.classList.remove('active');
             document.getElementById('inquiryRoomName').textContent = `Inquiring for: ${selectedRoomTitle} (${selectedRoomPrice})`;
             inquiryModal.classList.add('active');
         });
 
-        // --- Handle Form Submission & WhatsApp Redirect ---
         document.getElementById('inquiryForm').addEventListener('submit', (e) => {
             e.preventDefault();
             
-            // Collect Form Data
             const name = document.getElementById('inqName').value;
             const contact = document.getElementById('inqContact').value;
             const job = document.getElementById('inqJob').value || 'Not specified';
@@ -612,7 +619,6 @@
             const from = document.getElementById('inqFrom').value || 'Not specified';
             const days = document.getElementById('inqDays').value || 'Not specified';
             
-            // Format WhatsApp Message (using %0A for line breaks)
             const message = `*New Room Inquiry*%0A` +
                             `------------------------%0A` +
                             `*Room:* ${selectedRoomTitle}%0A` +
@@ -623,139 +629,59 @@
                             `*From:* ${from}%0A` +
                             `*Moving in:* ${days} days`;
                             
-            const targetPhone = TARGET_PHONE;
-            const waUrl = `https://wa.me/${targetPhone}?text=${message}`;
+            const waUrl = `https://wa.me/${TARGET_PHONE}?text=${message}`;
             
-            // Close form, show redirect loading screen with countdown and overlay controls
             inquiryModal.classList.remove('active');
-            const overlay = document.getElementById('redirectOverlay');
-            const countdownEl = document.getElementById('redirectCountdown');
-            overlay.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+            redirectOverlay.style.display = 'flex';
 
-            // start a visible 15s countdown
             let remaining = 15;
+            const countdownEl = document.getElementById('redirectCountdown');
             countdownEl.textContent = remaining;
-            // store last URL/message so overlay buttons can use it
+            
             window.__lastWaUrl = waUrl;
-            window.__lastMessage = message;
-            // store last form data so Terms overlay can reuse it
-            window.__lastForm = { name, contact, job, people, from, days, room: selectedRoomTitle };
 
             window.__redirectTimer = setInterval(() => {
                 remaining -= 1;
                 countdownEl.textContent = remaining;
                 if (remaining <= 0) {
                     clearInterval(window.__redirectTimer);
-                    // navigate
                     window.location.href = waUrl;
                 }
             }, 1000);
         });
 
-        // Overlay button handlers: View Terms and Instant Redirect
         document.getElementById('overlayInstantBtn').addEventListener('click', () => {
-            // open last WA url immediately in new tab and stop countdown
-            if (window.__redirectTimer) { clearInterval(window.__redirectTimer); window.__redirectTimer = null; }
-            const url = window.__lastWaUrl || (`https://wa.me/${TARGET_PHONE}`);
-            window.open(url, '_blank');
-            document.getElementById('redirectOverlay').style.display = 'none';
-            document.body.style.overflow = 'auto';
+            if (window.__redirectTimer) clearInterval(window.__redirectTimer);
+            window.location.href = window.__lastWaUrl || `https://wa.me/${TARGET_PHONE}`;
         });
 
         document.getElementById('overlayTermsBtn').addEventListener('click', () => {
-            // stop countdown and show in-page full-screen terms overlay
-            if (window.__redirectTimer) { clearInterval(window.__redirectTimer); window.__redirectTimer = null; }
-            document.getElementById('redirectOverlay').style.display = 'none';
-            showTermsOverlay(window.__lastMessage || '');
+            if (window.__redirectTimer) clearInterval(window.__redirectTimer);
+            redirectOverlay.style.display = 'none';
+            termsOverlay.classList.add('active');
         });
 
-        // room-level Terms button
         document.getElementById('roomTermsBtn').addEventListener('click', () => {
-            // when opening from room info, ensure no redirect timer is running
-            if (window.__redirectTimer) { clearInterval(window.__redirectTimer); window.__redirectTimer = null; }
-            showTermsOverlay('');
+            roomModal.classList.remove('active');
+            termsOverlay.classList.add('active');
         });
 
-        // Terms overlay controls
-        document.getElementById('closeTermsBtn').addEventListener('click', () => {
-            document.getElementById('termsOverlay').classList.remove('active');
+        document.getElementById('termsConfirmBtn').addEventListener('click', () => {
+            termsOverlay.classList.remove('active');
             document.body.style.overflow = 'auto';
-        });
-        document.getElementById('termsCloseOnlyBtn').addEventListener('click', () => {
-            document.getElementById('termsOverlay').classList.remove('active');
-            document.body.style.overflow = 'auto';
+            window.location.href = window.__lastWaUrl || `https://wa.me/${TARGET_PHONE}`;
         });
 
-        // Terms form submission (used when user agrees after reading Terms)
-        document.getElementById('termsForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('termsName').value || (window.__lastForm && window.__lastForm.name) || '';
-            const contact = document.getElementById('termsContact').value || (window.__lastForm && window.__lastForm.contact) || '';
-            const job = document.getElementById('termsJob').value || (window.__lastForm && window.__lastForm.job) || 'Not specified';
-            const people = document.getElementById('termsPeople').value || (window.__lastForm && window.__lastForm.people) || 'Not specified';
-            const from = document.getElementById('termsFrom').value || (window.__lastForm && window.__lastForm.from) || 'Not specified';
-            const days = document.getElementById('termsDays').value || (window.__lastForm && window.__lastForm.days) || 'Not specified';
-            const roomName = (window.__lastForm && window.__lastForm.room) || selectedRoomTitle || 'Room';
+        document.getElementById('closeRoomModal').addEventListener('click', () => { roomModal.classList.remove('active'); document.body.style.overflow = 'auto'; });
+        document.getElementById('closeInquiryModal').addEventListener('click', () => { inquiryModal.classList.remove('active'); document.body.style.overflow = 'auto'; });
+        document.getElementById('closeTermsBtn').addEventListener('click', () => { termsOverlay.classList.remove('active'); document.body.style.overflow = 'auto'; });
+        document.getElementById('termsCloseOnlyBtn').addEventListener('click', () => { termsOverlay.classList.remove('active'); document.body.style.overflow = 'auto'; });
 
-            const message = `*New Room Inquiry*%0A` +
-                            `------------------------%0A` +
-                            `*Room:* ${roomName}%0A` +
-                            `*Name:* ${name}%0A` +
-                            `*Contact:* ${contact}%0A` +
-                            `*Job:* ${job}%0A` +
-                            `*People:* ${people}%0A` +
-                            `*From:* ${from}%0A` +
-                            `*Moving in:* ${days} days`;
-
-            const waUrl = `https://wa.me/${TARGET_PHONE}?text=${message}`;
-            window.open(waUrl, '_blank');
-            document.getElementById('termsOverlay').classList.remove('active');
-            document.body.style.overflow = 'auto';
+        window.addEventListener('click', (e) => {
+            if (e.target === roomModal) { roomModal.classList.remove('active'); document.body.style.overflow = 'auto'; }
+            if (e.target === inquiryModal) { inquiryModal.classList.remove('active'); document.body.style.overflow = 'auto'; }
+            if (e.target === termsOverlay) { termsOverlay.classList.remove('active'); document.body.style.overflow = 'auto'; }
         });
-
-        function showTermsOverlay(preFilledMessage) {
-            // populate lastMessage and prefill fields from lastForm if present
-            window.__lastMessage = preFilledMessage || window.__lastMessage || '';
-            const f = window.__lastForm || {};
-            document.getElementById('termsName').value = f.name || '';
-            document.getElementById('termsContact').value = f.contact || '';
-            document.getElementById('termsJob').value = f.job || '';
-            document.getElementById('termsPeople').value = f.people || '';
-            document.getElementById('termsFrom').value = f.from || '';
-            document.getElementById('termsDays').value = f.days || '';
-
-            document.getElementById('termsOverlay').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function openTermsWindow(preFilledMessage) {
-            const w = window.open('', '_blank', 'width=600,height=700');
-            if (!w) return alert('Popup blocked. Please allow popups for instant Terms view.');
-            const html = `<!doctype html><html><head><title>Terms & Conditions</title><meta charset="utf-8"><style>body{font-family:Arial,Helvetica,sans-serif;padding:20px;} h1{color:#7b2cbf;} .terms{margin-bottom:20px;} .wa-btn{display:inline-block;padding:12px 18px;background:#25D366;color:#fff;border-radius:8px;text-decoration:none;font-weight:700;}</style></head><body>` +
-                `<h1>Terms & Conditions</h1>` +
-                `<div class="terms"><p><strong>Rent & Charges:</strong> Monthly rent as listed. Electricity and other utilities are billed separately based on actual usage and shared rules.</p>` +
-                `<p><strong>Advance:</strong> Security deposit / advance required as per agreement.</p>` +
-                `<p><strong>Other:</strong> Maintain cleanliness, no unauthorized alterations, follow house rules.</p></div>` +
-                `<p>If you agree, click below to open WhatsApp with your filled details.</p>` +
-                `<a id="agreeWa" class="wa-btn" href="https://wa.me/${TARGET_PHONE}?text=${preFilledMessage}" target="_blank">Agree & Open WhatsApp</a>` +
-                `</body></html>`;
-            w.document.write(html);
-            w.document.close();
-        }
-
-        // --- Close Modals General Logic ---
-        document.getElementById('closeRoomModal').addEventListener('click', () => {
-            roomModal.classList.remove('active'); document.body.style.overflow = 'auto';
-        });
-        document.getElementById('closeInquiryModal').addEventListener('click', () => {
-            inquiryModal.classList.remove('active'); document.body.style.overflow = 'auto';
-        });
-        
-        // Close if clicking outside the modal content
-        roomModal.addEventListener('click', (e) => { if (e.target === roomModal) { roomModal.classList.remove('active'); document.body.style.overflow = 'auto'; } });
-        inquiryModal.addEventListener('click', (e) => { if (e.target === inquiryModal) { inquiryModal.classList.remove('active'); document.body.style.overflow = 'auto'; } });
-
     </script>
 </body>
 </html>
